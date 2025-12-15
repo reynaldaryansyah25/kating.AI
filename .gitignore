@@ -1,0 +1,61 @@
+# ===============================
+# GENERAL
+# ===============================
+.DS_Store
+Thumbs.db
+*.log
+
+# ===============================
+# ENV FILES (WAJIB DIIGNORE)
+# ===============================
+.env
+.env.*
+!.env.example
+
+# ===============================
+# PYTHON / BACKEND (FastAPI)
+# ===============================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Pytest / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ===============================
+# NODE / FRONTEND (Vite + React)
+# ===============================
+node_modules/
+dist/
+build/
+.cache/
+
+# Vite
+.vite/
+
+# ===============================
+# TYPESCRIPT
+# ===============================
+*.tsbuildinfo
+
+# ===============================
+# EDITOR / IDE
+# ===============================
+.vscode/
+.idea/
+*.swp
+
+# ===============================
+# OS FILES
+# ===============================
+.DS_Store
+Thumbs.db

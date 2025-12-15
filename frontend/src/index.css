@@ -1,0 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Academic color palette - Professional indigo theme */
+    --background: 40 20% 98%;
+    --foreground: 220 25% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 25% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 25% 15%;
+
+    /* Deep indigo - academic, professional */
+    --primary: 230 65% 30%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Warm paper tone */
+    --secondary: 40 30% 94%;
+    --secondary-foreground: 220 25% 20%;
+
+    --muted: 40 15% 92%;
+    --muted-foreground: 220 10% 50%;
+
+    /* Gold accent for academic prestige */
+    --accent: 45 80% 50%;
+    --accent-foreground: 220 25% 15%;
+
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 15% 88%;
+    --input: 220 15% 92%;
+    --ring: 230 65% 40%;
+
+    --radius: 0.625rem;
+
+    /* Custom tokens */
+    --surface-elevated: 0 0% 100%;
+    --text-subtle: 220 10% 55%;
+    --success: 150 60% 40%;
+    --warning: 40 90% 50%;
+    
+    /* Shadows */
+    --shadow-soft: 0 2px 8px -2px hsl(220 25% 15% / 0.08), 0 4px 16px -4px hsl(220 25% 15% / 0.06);
+    --shadow-card: 0 1px 3px hsl(220 25% 15% / 0.06), 0 4px 12px -2px hsl(220 25% 15% / 0.08);
+    --shadow-button: 0 1px 2px hsl(230 65% 30% / 0.15), 0 2px 6px hsl(230 65% 30% / 0.1);
+
+    /* Typography */
+    --font-heading: 'Source Serif 4', Georgia, serif;
+    --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+
+    /* Sidebar (keeping defaults) */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 220 25% 10%;
+    --foreground: 40 20% 95%;
+
+    --card: 220 25% 13%;
+    --card-foreground: 40 20% 95%;
+
+    --popover: 220 25% 13%;
+    --popover-foreground: 40 20% 95%;
+
+    --primary: 230 60% 60%;
+    --primary-foreground: 220 25% 10%;
+
+    --secondary: 220 20% 18%;
+    --secondary-foreground: 40 20% 90%;
+
+    --muted: 220 20% 20%;
+    --muted-foreground: 220 15% 60%;
+
+    --accent: 45 70% 55%;
+    --accent-foreground: 220 25% 10%;
+
+    --destructive: 0 60% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 20% 22%;
+    --input: 220 20% 22%;
+    --ring: 230 60% 50%;
+
+    --surface-elevated: 220 25% 15%;
+    --text-subtle: 220 15% 55%;
+
+    --shadow-soft: 0 2px 8px -2px hsl(0 0% 0% / 0.3);
+    --shadow-card: 0 1px 3px hsl(0 0% 0% / 0.2), 0 4px 12px -2px hsl(0 0% 0% / 0.25);
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    font-family: var(--font-body);
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+}
+
+@layer components {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80;
+  }
+
+  .surface-elevated {
+    background-color: hsl(var(--surface-elevated));
+    box-shadow: var(--shadow-card);
+  }
+
+  .btn-shadow {
+    box-shadow: var(--shadow-button);
+  }
+
+  .btn-shadow:hover {
+    box-shadow: 0 2px 4px hsl(230 65% 30% / 0.2), 0 4px 12px hsl(230 65% 30% / 0.15);
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .animate-spin-slow {
+    animation: spin 1s linear infinite;
+  }
+}

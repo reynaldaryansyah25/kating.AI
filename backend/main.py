@@ -103,13 +103,36 @@ async def humanize_text(payload: HumanizeRequest):
     text = payload.text.strip()
 
     if not text:
-        raise HTTPException(status_code=400, detail="Teks tidak boleh kosong")
-
-    word_count = count_words(text)
-    if word_count > 150:
         raise HTTPException(
             status_code=400,
-            detail=f"Versi gratis maksimal 150 kata. Teks kamu berjumlah {word_count} kata.",
+            detail="Teks tidak boleh kosong."
+        )
+
+    # =========================
+    # WORD LIMIT LOGIC
+    # =========================
+    MIN_WORDS = 50
+    MAX_WORDS = 150
+
+    word_count = count_words(text)
+
+    if word_count < MIN_WORDS:
+        raise HTTPException(
+            status_code=400,
+            detail=(
+                f"Teks terlalu pendek untuk diproses. "
+                f"Minimal {MIN_WORDS} kata diperlukan agar hasil humanisasi optimal. "
+                f"Teks kamu saat ini: {word_count} kata."
+            ),
+        )
+
+    if word_count > MAX_WORDS:
+        raise HTTPException(
+            status_code=400,
+            detail=(
+                f"Versi gratis maksimal {MAX_WORDS} kata. "
+                f"Teks kamu berjumlah {word_count} kata."
+            ),
         )
 
     messages = build_standard_prompt(text)
@@ -119,8 +142,8 @@ async def humanize_text(payload: HumanizeRequest):
             model="llama-3.3-70b-versatile",
             messages=messages,
             temperature=0.85,
-            max_tokens=1024,
             top_p=0.9,
+            max_tokens=1024,
         )
 
         result_text = completion.choices[0].message.content.strip()
@@ -128,7 +151,7 @@ async def humanize_text(payload: HumanizeRequest):
         if not result_text:
             raise HTTPException(
                 status_code=500,
-                detail="Gagal menghasilkan teks. Silakan coba ulang.",
+                detail="Gagal menghasilkan teks. Silakan coba ulang."
             )
 
         return {"result": result_text}
@@ -140,8 +163,9 @@ async def humanize_text(payload: HumanizeRequest):
         print(f"[ERROR] {str(e)}")
         raise HTTPException(
             status_code=500,
-            detail="Server kating.AI sedang bermasalah. Silakan coba lagi nanti.",
+            detail="Server kating.AI sedang bermasalah. Silakan coba lagi nanti."
         )
+
 
 # =====================================================
 # HEALTH CHECK

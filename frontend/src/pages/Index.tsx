@@ -8,7 +8,7 @@ import { GraduationCap, ArrowRight, Copy, Check } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const WORD_LIMIT = 150;
-const API_URL = "http://127.0.0.1:8000/api/humanize";
+const API_URL = "https://kating-ai-backend.onrender.com/api/humanize";
 
 function countWords(text: string): number {
   return text.trim().split(/\s+/).filter(Boolean).length;

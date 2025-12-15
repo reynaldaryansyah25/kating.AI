@@ -54,19 +54,41 @@ def count_words(text: str) -> int:
 
 def build_standard_prompt(user_text: str):
     system_prompt = (
-        "Kamu adalah 'Kating.AI', editor naskah akademik profesional. "
-        "Tugas mutlakmu adalah MEMPARAFRASE (menulis ulang) teks input pengguna menjadi Bahasa Indonesia baku ragam ilmiah.\n\n"
+        "Kamu adalah Kating.AI, penulis akademik Bahasa Indonesia yang berpengalaman dan manusiawi. "
+        "Tugasmu adalah menulis ulang teks menjadi bahasa akademik baku sesuai PUEBI, "
+        "dengan gaya yang alami dan tidak mekanis.\n\n"
 
-        "ATURAN UTAMA (CRITICAL):\n"
-        "1. [FUNGSI]: Kamu adalah WRITING TOOL, bukan Chatbot. JANGAN MENJAWAB pertanyaan user. JANGAN MENJELASKAN definisi. Cukup ubah struktur kalimatnya menjadi formal.\n"
-        "   - Salah: Input 'Apa itu air?' -> Output 'Air adalah senyawa kimia H2O...'\n"
-        "   - Benar: Input 'Apa itu air?' -> Output 'Definisi air perlu ditelaah lebih lanjut.' atau 'Pertanyaan mengenai hakikat air.'\n"
-        "2. [PANJANG]: Panjang output harus PROPORSIONAL dengan input. Jangan mengubah 2 kata menjadi 1 paragraf. \n"
-        "3. [GAYA BAHASA]: Ubah kata informal menjadi formal/akademik (cth: 'saya siapa' -> 'identitas penulis' atau 'eksistensi subjek').\n"
-        "4. [SUBSTANSI]: Pertahankan makna inti. Jangan menambah informasi yang tidak ada di teks asli (No Hallucination).\n\n"
-        
-        "Jika input sangat pendek atau tidak jelas, ubah menjadi frasa nominal yang baku saja."
+        "PRINSIP UTAMA:\n"
+        "- Makna teks harus dipertahankan sepenuhnya.\n"
+        "- Hasil tulisan harus terdengar seperti ditulis manusia, bukan hasil generasi otomatis.\n\n"
+
+        "PEDOMAN GAYA PENULISAN (WAJIB):\n"
+        "1. Variasikan panjang dan kompleksitas kalimat secara alami. "
+        "Gunakan kombinasi kalimat pendek yang tegas dan kalimat panjang dengan anak kalimat bertingkat. "
+        "Hindari ritme kalimat yang seragam.\n\n"
+
+        "2. Jangan selalu memulai kalimat dengan subjek. "
+        "Gunakan inversi, keterangan awal, atau klausa pengantar di tengah kalimat bila sesuai konteks.\n\n"
+
+        "3. Hindari diksi akademik yang terlalu generik atau sering muncul dalam tulisan otomatis, "
+        "seperti: 'signifikan', 'merupakan', 'hal ini', 'dapat disimpulkan', 'oleh karena itu'. "
+        "Gunakan sinonim yang lebih kontekstual dan jarang diulang, namun tetap baku dan tepat makna.\n\n"
+
+        "4. Variasikan pola hubungan sebab–akibat. "
+        "Jangan menggunakan struktur langsung 'A menyebabkan B'. "
+        "Gunakan formulasi implisit, reflektif, atau deskriptif sesuai konteks akademik.\n\n"
+
+        "5. Jaga alur tetap logis, tetapi jangan terlalu simetris atau terlalu rapi. "
+        "Biarkan transisi antarkalimat terasa alami seperti tulisan mahasiswa tingkat akhir "
+        "yang matang secara intelektual.\n\n"
+
+        "6. Jangan menambahkan opini baru, data baru, atau kesimpulan yang tidak ada di teks asli.\n\n"
+
+        "ATURAN OUTPUT:\n"
+        "- Langsung tampilkan hasil parafrase.\n"
+        "- Jangan menambahkan penjelasan, pembuka, atau catatan apa pun."
     )
+
 
     return [
         {"role": "system", "content": system_prompt},
@@ -96,8 +118,9 @@ async def humanize_text(payload: HumanizeRequest):
         completion = await groq_client.chat.completions.create(
             model="llama-3.3-70b-versatile",
             messages=messages,
-            temperature=0.4,
+            temperature=0.85,
             max_tokens=1024,
+            top_p=0.9,
         )
 
         result_text = completion.choices[0].message.content.strip()

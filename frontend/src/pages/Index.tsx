@@ -131,7 +131,7 @@ const Index = () => {
             </label>
             <Textarea
               variant="academic"
-              placeholder="Tempelkan teks kamu di sini (draft skripsi, hasil ChatGPT, dll)"
+              placeholder="Tempelkan teks makalah, jurnal, atau tugas akademik kamu..."
               className="min-h-[260px] resize-none"
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
@@ -177,7 +177,7 @@ const Index = () => {
               </>
             ) : (
               <>
-                Rapikan Jadi Bahasa Skripsi
+                Ubah ke Bahasa Akademik
                 <ArrowRight className="w-4 h-4" />
               </>
             )}

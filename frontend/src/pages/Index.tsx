@@ -7,7 +7,7 @@ import { PremiumCTA } from "@/components/PremiumCTA";
 import { GraduationCap, ArrowRight, Copy, Check } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
-const WORD_LIMIT = 150;
+const WORD_LIMIT = 300;
 const API_URL = "https://kating-ai-backend.onrender.com/api/humanize";
 
 function countWords(text: string): number {

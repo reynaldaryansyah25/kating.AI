@@ -112,7 +112,7 @@ async def humanize_text(payload: HumanizeRequest):
     # WORD LIMIT LOGIC
     # =========================
     MIN_WORDS = 50
-    MAX_WORDS = 150
+    MAX_WORDS = 300
 
     word_count = count_words(text)
 
